@@ -8,6 +8,8 @@ import Noticia from "../components/Noticias/Noticia";
 import ListaNoticias from "../components/Noticias/ListaNoticias";
 import Paginador from "../components/Paginador/Paginador"
 import CantidadNoticias from "../components/Noticias/CantidadNoticias";
+import { AppBar, Typography } from "@mui/material";
+import Footer from "../components/Footer/Footer";
 
 
 const PaginaJournal = () => {
@@ -39,6 +41,12 @@ const PaginaJournal = () => {
         setPagina(pagina);
     };
     return(
+        <>
+        <AppBar >
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1, m:1 }}>
+            News
+        </Typography>
+        </AppBar>
         <Container maxWidth='sm' >
             <Buscador onBuscar={onBuscar}/>
             { isLoading && <Loading /> }
@@ -46,6 +54,8 @@ const PaginaJournal = () => {
             { noticias && <ListaNoticias noticias={noticias}/>}
             { noticias && <Paginador cantidadPaginas={cantidadPaginas} onChange={onCambioPagina}></Paginador>}
         </Container>
+        <Footer/>
+        </>
     )
 }
 
