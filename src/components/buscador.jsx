@@ -3,37 +3,45 @@ import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import { useState } from "react";
-import { getListJournal } from '../servicios/wallstreet';
 
-
-const Buscador = () => {
+const Buscador = ({ onBuscar }) => {
 
     const [criterioBusqueda, setCriterioBusqueda] = useState('');
     return (
           <Paper
             component="div"
-            sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400, marginTop:10 }}
+            sx={{ display: 'flex', alignItems: 'center', width: 700, mt:10,mb:5 }}
           >
             <InputBase
-              sx={{ ml: 1, flex: 1 }}
+              sx={{ ml: 1, flex: 1}}
               placeholder="Buscar"
               inputProps={{ 'aria-label': 'search google maps' }}
               value={criterioBusqueda}
               onChange={(e) => { 
                 setCriterioBusqueda(e.target.value)
               }}
-              // onKeyDown={}
+
+              onKeyPress={(e) => {
+                if(e.key === "Enter"){
+
+                  if(criterioBusqueda.length > 2) {
+                    onBuscar(criterioBusqueda)
+                  }
+                }
+              }}
             />
             <>
-              {criterioBusqueda.length > 3 &&
+              {criterioBusqueda.length > 2 &&
               <IconButton
               type="button"
               sx={{ p: '10px' }}
               aria-label="search"
               onClick={() => {
-                console.log(getListJournal())
-                setCriterioBusqueda('')
+                if(criterioBusqueda.length > 2) {
+                  onBuscar(criterioBusqueda)
+                }
               }}
+              
               >
                 <SearchIcon />
               

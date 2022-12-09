@@ -1,14 +1,32 @@
-import Buscador from "./components/buscador";
-import { getListJournal } from "./servicios/wallstreet";
+import PaginaJournal from "./pages/PaginaJournal";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route
+} from 'react-router-dom';
+import Error404 from "./components/Errores/Error404";
 
 
+const router = createBrowserRouter([
+  {
+    path:"/",
+    element:<PaginaJournal/>,
+    errorElement:<Error404/>
+    
+  },
+  {
+    path:"/buscador",
+    element:<PaginaJournal/>,
+    errorElement:<Error404/>
+    
+  }
+])
 function App() {
-  console.log(getListJournal())
   return (
-    <div>
-      <div>
-        <Buscador></Buscador>
-      </div>
+    <div >
+      <RouterProvider router={router}>
+
+      </RouterProvider>
     </div>
   );
 }
